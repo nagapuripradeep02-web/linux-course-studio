@@ -1,0 +1,55 @@
+{
+ "desktop": {
+  "duration": 34.1,
+  "events": {
+   "start": 1.11,
+   "open_files": 7.371,
+   "open_term": 11.137,
+   "open_sysmon": 16.682,
+   "all_open": 24.714,
+   "end": 32.729
+  }
+ },
+ "sysmon": {
+  "duration": 41.6,
+  "events": {
+   "start": 1.055,
+   "procs": 2.58,
+   "to_resources": 21.058,
+   "resources": 23.045,
+   "memory": 28.669,
+   "end": 40.272
+  }
+ },
+ "files": {
+  "duration": 52.667,
+  "events": {
+   "start": 1.048,
+   "tour": 2.265,
+   "open_etc": 17.345,
+   "back": 26.949,
+   "top": 29.415,
+   "open_dev": 35.476,
+   "end": 51.551
+  }
+ },
+ "terminal": {
+  "duration": 33.1,
+  "events": {
+   "start": 1.107,
+   "open_term": 2.333,
+   "type_uname_a": 11.322,
+   "enter_uname_a": 12.789,
+   "type_uname_r": 14.84,
+   "enter_uname_r": 16.282,
+   "type_shell": 18.318,
+   "enter_shell": 20.05,
+   "clear": 22.088,
+   "type_ps": 22.951,
+   "enter_ps": 25.215,
+   "type_free": 27.759,
+   "enter_free": 28.925,
+   "end": 31.968
+  }
+ }
+}

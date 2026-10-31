@@ -1,0 +1,18 @@
+# dependencies (recreated by /setup)
+studio/node_modules/
+voice/.venv/
+__pycache__/
+
+# generated media: footage, narration audio, renders, review frames (rebuilt per lesson)
+studio/public/*/
+voice/out/
+out/
+
+# scratch files written by the recorder
+lab/_*.sh
+*.part.mp4
+
+# editors / OS
+.DS_Store
+Thumbs.db
+.claude/settings.local.json

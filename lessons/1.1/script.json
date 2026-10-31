@@ -1,0 +1,141 @@
+{
+ "lesson": {
+  "module": 1,
+  "moduleTitle": "Introduction to Operating Systems and Linux",
+  "number": "1.1",
+  "title": "What is an operating system?",
+  "next": {
+   "number": "1.2",
+   "title": "How Linux came into existence"
+  },
+  "bumperSeconds": 4,
+  "thumbnail": {
+   "chips": [
+    {
+     "label": "Kernel",
+     "color": "teal"
+    },
+    {
+     "label": "Shell",
+     "color": "accent"
+    },
+    {
+     "label": "User space",
+     "color": "blue"
+    }
+   ],
+   "prompt": "uname -o",
+   "output": "GNU/Linux"
+  }
+ },
+ "segments": [
+  {
+   "id": "s01",
+   "chapter": "Welcome",
+   "text": "Welcome to the course. I'm really glad you're here. In this first module, we build the foundation that everything else stands on: what an operating system is, where Linux came from, and how to set up a lab where you can practise. And in this lesson, we start with the most basic question of all. By the end, you'll be able to explain what an operating system does, and name three key ideas: the kernel, the shell, and user space.",
+   "tail": 0.8
+  },
+  {
+   "id": "s02",
+   "chapter": "Who decides?",
+   "text": "So, let's start with a simple question. Look at this screen. This is a Linux desktop, running right now. When I open a file manager, a terminal, and a system monitor, all at the same time, who decides which program gets the processor? Who decides where the files are stored? And what happens when you plug in a USB drive? The answer to all three questions is the operating system, or OS.",
+   "tail": 0.6
+  },
+  {
+   "id": "s03",
+   "chapter": "The big picture",
+   "text": "Think of the operating system as a manager, standing between you and the hardware. At the bottom is the hardware: the processor, memory, disks, and network cards. At the top are your applications, like a web browser or a text editor. And in between sits the operating system. Now here's the rule that matters most. Applications never talk to the hardware directly. They ask the operating system, the operating system does the work, and then it hands back the result. Keep that picture in mind. We'll come back to it again and again in this course.",
+   "tail": 1
+  },
+  {
+   "id": "s04",
+   "chapter": "Four jobs of an OS",
+   "text": "Every operating system has four main jobs. Let's look at each one on a real system.",
+   "tail": 0.6
+  },
+  {
+   "id": "s05",
+   "chapter": "Four jobs of an OS",
+   "text": "Job one is process management. Every running program is called a process, and here in the system monitor you can see the list. The operating system decides which process runs, when, and for how long. It switches between them so quickly that everything seems to run at the same time.",
+   "tail": 0.3
+  },
+  {
+   "id": "s06",
+   "chapter": "Four jobs of an OS",
+   "text": "Job two is memory management. Each program gets its own space in memory, and the operating system stops one program from damaging another. This graph shows how much memory is in use, right now.",
+   "tail": 0.3
+  },
+  {
+   "id": "s07",
+   "chapter": "Four jobs of an OS",
+   "text": "Job three is the file system. To the hardware, a disk is just a huge collection of storage blocks. The operating system organises those blocks into files and folders, which Linux calls directories, so you can name them, open them, and find them again. This folder, /etc, for example, holds the system's settings. And what you're seeing here is the very top of the Linux file tree.",
+   "tail": 0.4
+  },
+  {
+   "id": "s08",
+   "chapter": "Four jobs of an OS",
+   "text": "And job four is device control. Keyboards, disks, network cards, USB drives. The operating system talks to each of them through small programs called drivers. In Linux, devices even show up as files, here in the dev directory. We'll explore that properly later in this module.",
+   "tail": 0.8
+  },
+  {
+   "id": "s09",
+   "chapter": "Kernel, shell, user space",
+   "text": "Now, two words you'll hear every single day in Linux: the kernel, and the shell. The kernel is the core of the operating system. It runs with full access to the hardware, and it's the part that actually does those four jobs. The shell is the program that lets you type commands. It reads what you type, and asks the kernel to carry it out. Everything else, your applications, your tools, and even the shell itself, lives in what we call user space. The kernel itself works in its own protected area, called kernel space.",
+   "tail": 1
+  },
+  {
+   "id": "s10",
+   "chapter": "Operating systems everywhere",
+   "text": "You already use operating systems every day. Windows and macOS on laptops. Android and iOS on phones. And Linux runs on servers, cloud platforms, routers, and even smart TVs. In fact, Android is built on the Linux kernel. And most of the servers behind the websites you use every day run Linux. That's exactly why Linux skills are so valuable.",
+   "tail": 1
+  },
+  {
+   "id": "s11",
+   "chapter": "Hands-on: your first commands",
+   "text": "Enough theory. Let's see all of this on a real system. I'll open a terminal. The command uname -a prints information about the system. Let's read it together. First, the word Linux. That's the name of the kernel. Next is the machine's name, linux-lab. Then comes the kernel release, followed by details of how and when that kernel was built. And near the end, x86_64 tells us the processor type: a standard sixty-four bit PC processor. And at the very end: GNU/Linux. Remember that name. It's the story of our next lesson.",
+   "tail": 0.3
+  },
+  {
+   "id": "s12",
+   "chapter": "Hands-on: your first commands",
+   "text": "If I only want the kernel release, I type uname -r. Now, you may notice the word microsoft in my version. That's because my lab runs on Windows, on a Linux kernel that Microsoft builds for a feature called WSL. We'll set up WSL together in lesson 1.5. It's still a genuine Linux kernel. Your version number will probably be different, and that's perfectly fine.",
+   "tail": 0.3
+  },
+  {
+   "id": "s13",
+   "chapter": "Hands-on: your first commands",
+   "text": "Next, echo $SHELL shows my login shell: the shell my account starts with. On most systems, including this one, the answer is bash. That's the program reading every command I type, right now.",
+   "tail": 0.3
+  },
+  {
+   "id": "s14",
+   "chapter": "Hands-on: your first commands",
+   "text": "Let me list a few processes with ps aux, and pipe the output into head. That vertical bar is called a pipe: it sends the output of one command into the next. Head keeps just the first five lines: a header, then four processes. Each process is a program the kernel is managing. You can see the user that owns it, its process ID, or PID, how much CPU and memory it's using, and on the far right, the command that started it.",
+   "tail": 0.3
+  },
+  {
+   "id": "s15",
+   "chapter": "Hands-on: your first commands",
+   "text": "And finally, free -h shows memory. The h means human-readable, so we see gigabytes instead of raw numbers. Total is all the memory this machine has. Used is what programs are using right now. And available is how much is still ready for new programs. Don't worry that free looks small: Linux borrows spare memory as a cache, and gives it back the moment a program needs it. That's why available is the number to watch. That's the memory management job, visible in a single command.",
+   "tail": 0.8
+  },
+  {
+   "id": "s16",
+   "chapter": "Your turn",
+   "text": "Now it's your turn. Pause the video, and run these five commands on your own system. If you don't have Linux yet, don't worry. Just watch for now. You'll have your own lab by lesson 1.5.",
+   "tail": 1.6
+  },
+  {
+   "id": "s17",
+   "chapter": "Recap",
+   "text": "Let's recap. The operating system manages the hardware on behalf of your applications. The kernel is its core. The shell is how you talk to it. And user space is where your programs run.",
+   "tail": 1
+  },
+  {
+   "id": "s18",
+   "chapter": "Recap",
+   "text": "In the next lesson, we'll travel back in time and see how Linux came into existence. I'll see you there.",
+   "tail": 2.5
+  }
+ ]
+}
