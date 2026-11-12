@@ -18,6 +18,8 @@ export type Highlight = {
   label?: string;
   side?: "top" | "bottom" | "left" | "right";
   color?: string;
+  /** nudge the label down by this many source pixels (e.g. one terminal row = ~26) to clear text under it */
+  dy?: number;
 };
 export type LowerThird = { from: number; to: number; cmd: string; meaning: string };
 
@@ -131,6 +133,7 @@ const HighlightBox: React.FC<{ h: Highlight; t: number; scale: number }> = ({ h,
   if (side === "top") Object.assign(labelStyle, { bottom: hh + pad * 2 + gap, left: 0 });
   if (side === "right") Object.assign(labelStyle, { left: w + pad * 2 + gap, top: 0 });
   if (side === "left") Object.assign(labelStyle, { right: w + pad * 2 + gap, top: 0 });
+  if (h.dy) labelStyle.marginTop = h.dy;
   return (
     <div
       style={{

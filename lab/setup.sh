@@ -35,6 +35,14 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq ffmpeg gnome-system-monitor fonts-jetbrains-mono x11-utils wmctrl >/dev/null
+# The image is "minimized" (no manual pages; `man` is a stub that prints a notice). A desktop Ubuntu has them,
+# and the course uses `man`, so restore them: keep man pages, drop the stub, reinstall the core packages' pages.
+# (Ubuntu 26.04 ships ls/uname/... from uutils, which has no man pages: `man ls` stays empty, `man bash` works.)
+sed -i "s|^path-exclude=/usr/share/man/\*|# man pages kept for the course|" /etc/dpkg/dpkg.cfg.d/excludes || true
+if dpkg-divert --list /usr/bin/man | grep -q .; then rm -f /usr/bin/man; dpkg-divert --quiet --remove --rename /usr/bin/man; fi
+apt-get install -y -qq --reinstall man-db manpages groff-base bash gnu-coreutils util-linux procps grep sed findutils tar gzip less apt dpkg passwd >/dev/null
+apt-get install -y -qq groff >/dev/null
+mandb -q || true
 # The image ships user "abc"; present it as "student" (same uid) so prompts and panels read naturally.
 sed -i "s/^abc:/student:/" /etc/passwd /etc/shadow /etc/group
 sed -i "s/^\(sudo:.*\)abc/\1student/" /etc/group

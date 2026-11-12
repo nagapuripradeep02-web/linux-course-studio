@@ -6,6 +6,18 @@ import re
 # subtitles and anchors always use the display text.
 TTS_SUBS = [
     (r"\bGNU/Linux\b", "guh-new slash Linux"),
+    (r"\bGNU\b", "guh-new"),
+    (r"\bUbuntu\b", "oo-boon-too"),
+    (r"\b[Dd]ebian\b", "Deb-ee-an"),
+    (r"\bvmlinuz\b", "vee-em-linuz"),
+    (r"\bLTS\b", "L T S"),
+    (r"\bPRETTY_NAME\b", "PRETTY NAME"),
+    (r"\bID_LIKE\b", "I D like"),
+    (r"/os-release\b", " slash O S release"),
+    (r"/boot\b", "slash boot"),
+    (r"\bls\b", "L S"),
+    (r"\bcp\b", "C P"),
+    (r"--version\b", "dash dash version"),
     (r"/etc\b", "slash E T C"),
     (r"\bmacOS\b", "mac O S"),
     (r"\biOS\b", "eye O S"),
@@ -19,9 +31,14 @@ TTS_SUBS = [
     (r"\bWSL\b", "W S L"),
     (r"\bx86_64\b", "x86, 64"),
     (r"\b1\.5\b", "one point five"),
+    (r"\bAT&T\b", "A T and T"),
+    (r"\b26\.04\.1\b", "twenty-six oh four point one"),
+    (r"\bq\b", "Q"),
+    (r"\b1\.1\b", "one point one"),
     (r"\b1\.2\b", "one point two"),
     (r"-a\b", "dash [A](/ˈA/),"),
     (r"-r\b", "dash R"),
+    (r"-o\b", "dash O"),
     (r"-h\b", "dash H"),
 ]
 

@@ -163,21 +163,32 @@ const Objective: React.FC<{ n: number; at: number; text: string; children?: Reac
   </Reveal>
 );
 
-export type Tile = { icon: (p: { size?: number; color?: string }) => React.ReactNode; title: string; sub: string };
+export type Tile = {
+  icon: (p: { size?: number; color?: string }) => React.ReactNode;
+  title: string;
+  sub: string;
+  /** optional narration phrase (inside `seg`) that reveals this tile; default: one after another from `at` */
+  at?: string;
+};
 
-/** Two-column grid of 2–6 tiles, revealed one after another from the phrase `at` (icons: Icon in ../kit). */
-export const TileGrid: React.FC<{ seg: string; at: string; eyebrow: string; kicker?: string; tiles: Tile[] }> = ({
-  seg,
-  at: phrase,
-  eyebrow,
-  kicker,
-  tiles,
-}) => {
+/**
+ * Two-column grid of 2–6 tiles, revealed one after another from the phrase `at` (icons: Icon in ../kit).
+ * Give a tile its own `at` to reveal it exactly when it is spoken. `footer` appears at its phrase, bottom of the card.
+ */
+export const TileGrid: React.FC<{
+  seg: string;
+  at: string;
+  eyebrow: string;
+  kicker?: string;
+  tiles: Tile[];
+  footer?: { at: string; node: React.ReactNode };
+}> = ({ seg, at: phrase, eyebrow, kicker, tiles, footer }) => {
   const t0 = at(seg, phrase) - 0.4;
-  const tileH = tiles.length > 4 ? 230 : 300;
+  const many = tiles.length > 4;
+  const tileH = many ? 230 : 300;
   return (
     <Stage>
-      <AbsoluteFill style={{ padding: "150px 160px" }}>
+      <AbsoluteFill style={{ padding: many ? "100px 160px" : "150px 160px" }}>
         <Reveal at={0.1}>
           <Eyebrow>{eyebrow}</Eyebrow>
         </Reveal>
@@ -186,11 +197,11 @@ export const TileGrid: React.FC<{ seg: string; at: string; eyebrow: string; kick
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: 34,
-            marginTop: 60,
+            marginTop: many ? 44 : 60,
           }}
         >
           {tiles.map((j, i) => (
-            <Reveal key={j.title} at={t0 + i * 0.28} y={24}>
+            <Reveal key={j.title} at={j.at ? at(seg, j.at) - 0.25 : t0 + i * 0.28} y={24}>
               <div
                 style={{
                   background: c.panel,
@@ -231,6 +242,13 @@ export const TileGrid: React.FC<{ seg: string; at: string; eyebrow: string; kick
             </Reveal>
           ))}
         </div>
+        {footer && (
+          <div style={{ position: "absolute", left: 160, right: 160, bottom: 84 }}>
+            <Reveal at={at(seg, footer.at) - 0.25} y={14}>
+              {footer.node}
+            </Reveal>
+          </div>
+        )}
       </AbsoluteFill>
     </Stage>
   );
@@ -244,7 +262,9 @@ export const TryIt: React.FC<{
   commands: { cmd: string; what: string }[];
   /** optional side note (e.g. for learners who have no Linux yet), revealed on its phrase */
   note?: { at: string; text: string };
-}> = ({ seg, listAt, commands, note }) => {
+  /** width in px of the command column (default 420: fits ~16 characters; widen for longer commands) */
+  cmdW?: number;
+}> = ({ seg, listAt, commands, note, cmdW = 420 }) => {
   const tList = at(seg, listAt) - 0.3;
   return (
     <Stage>
@@ -257,7 +277,7 @@ export const TryIt: React.FC<{
             </div>
           </Reveal>
           <Reveal at={0.35}>
-            <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1.05, marginTop: 30, letterSpacing: -2 }}>
+            <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1.05, marginTop: 30, letterSpacing: -2, textWrap: "balance" }}>
               Pause the video and try it
             </div>
           </Reveal>
@@ -288,7 +308,7 @@ export const TryIt: React.FC<{
               <Reveal key={cm.cmd} at={tList + i * 0.35} x={-16} y={0}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 22 }}>
                   <span style={{ fontFamily: font.mono, color: c.green, fontSize: 38 }}>$</span>
-                  <span style={{ fontFamily: font.mono, fontSize: 42, fontWeight: 500, width: 420 }}>{cm.cmd}</span>
+                  <span style={{ fontFamily: font.mono, fontSize: 42, fontWeight: 500, width: cmdW, flexShrink: 0 }}>{cm.cmd}</span>
                   <span style={{ fontSize: 29, color: c.muted }}>{cm.what}</span>
                 </div>
               </Reveal>
@@ -300,46 +320,49 @@ export const TryIt: React.FC<{
   );
 };
 
-/** Recap card: three takeaways keyed to narration. */
+/** Recap card: takeaways keyed to narration (4 or more points use a compact layout so they fit the frame). */
 export const Recap: React.FC<{ seg: string; points: { at: string; title: string; body: string; color: string }[] }> = ({
   seg,
   points,
-}) => (
-  <Stage>
-    <AbsoluteFill style={{ padding: "150px 160px" }}>
-      <Reveal at={0.1}>
-        <Eyebrow>Recap</Eyebrow>
-      </Reveal>
-      <Reveal at={0.3}>
-        <div style={{ fontSize: 76, fontWeight: 800, marginTop: 18, letterSpacing: -2 }}>What you learned</div>
-      </Reveal>
-      <div style={{ display: "flex", flexDirection: "column", gap: 22, marginTop: 44 }}>
-        {points.map((p) => (
-          <Reveal key={p.title} at={at(seg, p.at) - 0.2} x={-20} y={0}>
-            <div
-              style={{
-                display: "flex",
-                gap: 34,
-                alignItems: "center",
-                background: c.panel,
-                border: `1px solid ${c.line}`,
-                borderLeft: `8px solid ${p.color}`,
-                borderRadius: 20,
-                padding: "30px 40px",
-              }}
-            >
-              {Icon.check({ size: 54, color: p.color, stroke: 3.5 })}
-              <div>
-                <div style={{ fontSize: 46, fontWeight: 700 }}>{p.title}</div>
-                <div style={{ fontSize: 32, color: c.muted, marginTop: 6 }}>{p.body}</div>
+}) => {
+  const dense = points.length > 3;
+  return (
+    <Stage>
+      <AbsoluteFill style={{ padding: dense ? "110px 160px" : "150px 160px" }}>
+        <Reveal at={0.1}>
+          <Eyebrow>Recap</Eyebrow>
+        </Reveal>
+        <Reveal at={0.3}>
+          <div style={{ fontSize: dense ? 64 : 76, fontWeight: 800, marginTop: 14, letterSpacing: -2 }}>What you learned</div>
+        </Reveal>
+        <div style={{ display: "flex", flexDirection: "column", gap: dense ? 16 : 22, marginTop: dense ? 30 : 44 }}>
+          {points.map((p) => (
+            <Reveal key={p.title} at={at(seg, p.at) - 0.2} x={-20} y={0}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 34,
+                  alignItems: "center",
+                  background: c.panel,
+                  border: `1px solid ${c.line}`,
+                  borderLeft: `8px solid ${p.color}`,
+                  borderRadius: 20,
+                  padding: dense ? "20px 40px" : "30px 40px",
+                }}
+              >
+                {Icon.check({ size: dense ? 46 : 54, color: p.color, stroke: 3.5 })}
+                <div>
+                  <div style={{ fontSize: dense ? 42 : 46, fontWeight: 700 }}>{p.title}</div>
+                  <div style={{ fontSize: dense ? 30 : 32, color: c.muted, marginTop: 4 }}>{p.body}</div>
+                </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </AbsoluteFill>
-  </Stage>
-);
+            </Reveal>
+          ))}
+        </div>
+      </AbsoluteFill>
+    </Stage>
+  );
+};
 
 /** Closing card: next lesson (from script.json lesson.next) + course mark, revealed on the phrase `at`. */
 export const NextUp: React.FC<{ seg: string; at?: string }> = ({ seg, at: phrase = "In the next lesson" }) => {

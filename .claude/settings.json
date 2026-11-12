@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(python tools/*)",
+      "Bash(python lab/record.py*)",
+      "Bash(bash lab/setup.sh)",
+      "Bash(voice/.venv/Scripts/python *)",
+      "Bash(voice/.venv/bin/python *)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)",
+      "Bash(docker exec linux-lab *)",
+      "Bash(docker ps*)",
+      "Bash(docker info*)",
+      "Bash(docker --version)",
+      "Bash(cd studio && npm install*)",
+      "Bash(node -v)",
+      "Bash(npm -v)",
+      "Bash(python --version)",
+      "Bash(git --version)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)"
+    ],
+    "deny": [
+      "Bash(docker start linux-lab*)"
+    ]
+  }
+}

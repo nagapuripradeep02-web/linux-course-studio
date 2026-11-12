@@ -1,0 +1,27 @@
+{
+ "terminal": {
+  "duration": 71.167,
+  "events": {
+   "start": 0.656,
+   "open_term": 1.897,
+   "type_osr": 11.731,
+   "enter_osr": 14.418,
+   "clear1": 17.504,
+   "type_unr": 18.393,
+   "enter_unr": 19.706,
+   "type_uno": 22.251,
+   "enter_uno": 23.664,
+   "clear2": 26.715,
+   "type_bash": 27.591,
+   "enter_bash": 29.681,
+   "clear3": 32.722,
+   "type_boot": 33.63,
+   "enter_boot": 34.93,
+   "clear4": 38.981,
+   "type_man": 39.856,
+   "enter_man": 42.541,
+   "man_out": 45.594,
+   "end": 69.62
+  }
+ }
+}

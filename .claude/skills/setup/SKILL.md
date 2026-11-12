@@ -68,4 +68,4 @@ re-recording, so `python tools/studio.py open` shows the finished lesson.
 
 ## 6. Report
 Tell the instructor, in plain words: what is installed and working, what you installed, anything they must still do,
-and that the next step is `/lesson 1.2` (in a fresh session). Keep it under 12 lines.
+and that the next step is `/lesson <id>` for the first lesson in `course/module-1.md` without a `lessons/<id>/` folder (in a fresh session). Keep it under 12 lines.

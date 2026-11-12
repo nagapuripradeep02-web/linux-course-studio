@@ -1,0 +1,147 @@
+{
+ "lesson": {
+  "module": 1,
+  "moduleTitle": "Introduction to Operating Systems and Linux",
+  "number": "1.2",
+  "title": "How Linux came into existence",
+  "next": {
+   "number": "1.3",
+   "title": "Linux distributions"
+  },
+  "bumperSeconds": 4,
+  "thumbnail": {
+   "chips": [
+    {
+     "label": "Unix",
+     "color": "accent"
+    },
+    {
+     "label": "GNU",
+     "color": "teal"
+    },
+    {
+     "label": "Linux",
+     "color": "blue"
+    }
+   ],
+   "prompt": "bash --version",
+   "output": "GNU bash, version 5.3.9(1)-release (x86_64-pc-linux-gnu)"
+  }
+ },
+ "segments": [
+  {
+   "id": "s01",
+   "chapter": "Welcome",
+   "text": "Welcome back. At the end of the last lesson, our first command finished with a strange name: GNU/Linux. In this lesson, we find out where that name comes from. By the end, you'll be able to describe the path from Unix, to GNU, to Linux, and explain why some people call our system GNU/Linux.",
+   "tail": 0.8
+  },
+  {
+   "id": "s02",
+   "chapter": "Welcome",
+   "text": "Here is the whole story. In 1969, Unix is born. In 1983, the GNU project begins. In 1991, the Linux kernel appears. Through the 1990s, distributions package it all for ordinary users. And today, Linux runs everywhere. Let's take the steps one at a time.",
+   "tail": 0.8
+  },
+  {
+   "id": "s03",
+   "chapter": "Unix, 1969",
+   "text": "In 1969, engineers at Bell Labs, the research lab of the phone company AT&T, including Ken Thompson and Dennis Ritchie, created an operating system called Unix. In the early 1970s, they rewrote it in a language called C. That was a big step, because a program written in C can be rebuilt for different kinds of machines. So Unix could spread. Universities and companies adopted it quickly.",
+   "tail": 0.8
+  },
+  {
+   "id": "s04",
+   "chapter": "Unix, 1969",
+   "text": "Unix also made popular some ideas we still use today. First, a tree of files and directories. Second, small tools that each do one job well. And third, a way to connect those tools together. Think of a kitchen. One knife slices, one pan fries, and the cook combines them into a meal. You already did this in the last lesson. The pipe, in ps aux piped into head, joined two small tools.",
+   "tail": 0.8
+  },
+  {
+   "id": "s05",
+   "chapter": "GNU, 1983",
+   "text": "But there was a problem. Unix became commercial and expensive, and its source code was restricted. Source code is the readable set of instructions behind a program. If you can't read it, you can't study how the program works. You can't fix it. And you can't share it. Some people felt that software shouldn't work like that.",
+   "tail": 0.8
+  },
+  {
+   "id": "s06",
+   "chapter": "GNU, 1983",
+   "text": "So in 1983, Richard Stallman started the GNU project. GNU stands for GNU's Not Unix. It's a little joke: the system would work like Unix, but contain none of its code. The goal was a completely free operating system. Free here means freedom. You can use it, study it, change it, and share it. That has nothing to do with price.",
+   "tail": 0.8
+  },
+  {
+   "id": "s07",
+   "chapter": "GNU, 1983",
+   "text": "By the early 1990s, GNU had produced many of the essential parts. A compiler, which turns code into programs. The bash shell, the program you've been typing commands into. Core utilities, like ls and cp, for listing and copying files. And editors. But one big piece was still missing: a working kernel.",
+   "tail": 1
+  },
+  {
+   "id": "s08",
+   "chapter": "Linux, 1991",
+   "text": "Then, in 1991, a Finnish student named Linus Torvalds announced a hobby project: a new kernel for personal computers. He even called it just a hobby. He shared the source code online and invited others to help. And people did. That kernel became Linux.",
+   "tail": 0.8
+  },
+  {
+   "id": "s09",
+   "chapter": "Linux, 1991",
+   "text": "Here's the key point. Think of a car. The GNU project had built the essential tools around the engine: the body, the wheels, the dashboard. But it had no engine. Linus built an engine, with nothing around it. Put the two together, and you have a complete, free operating system. Strictly speaking, the name Linux belongs only to the kernel. That's why some people say GNU/Linux. In everyday speech, we simply say Linux.",
+   "tail": 1
+  },
+  {
+   "id": "s10",
+   "chapter": "Linux, 1991",
+   "text": "During the 1990s, groups began to package the kernel, the GNU tools, and an installer together, so that ordinary people could set up a working system. Those packages are called distributions. Ubuntu, the system in our lab, is one of them. In the next lesson, we'll meet several more.",
+   "tail": 1
+  },
+  {
+   "id": "s11",
+   "chapter": "Linux, 1991",
+   "text": "Today, Linux runs almost everywhere. Most of the world's web servers. Every one of the world's 500 fastest supercomputers. Cloud platforms. Android phones. Routers, cars, and televisions. Many of these use only the kernel, without the GNU tools. A kernel that began as one student's hobby is now developed by thousands of engineers and companies around the world.",
+   "tail": 1
+  },
+  {
+   "id": "s12",
+   "chapter": "Hands-on: the result",
+   "text": "Now let's look at the result on a real machine. I'll open a terminal. The file /etc/os-release describes the distribution we're running, and I'll print it with cat, a command that prints a file. Look at the first line: PRETTY_NAME, Ubuntu 26.04.1 LTS. That's the distribution and its version. LTS means long-term support. Further down, VERSION adds a code name, and ID_LIKE says debian. Ubuntu is built on top of an older distribution called Debian.",
+   "tail": 0.3
+  },
+  {
+   "id": "s13",
+   "chapter": "Hands-on: the result",
+   "text": "Next, uname -r prints the Linux kernel release, the number we met in lesson 1.1. Yours will look different. The word microsoft appears in mine because my lab runs on Windows, through WSL, the Windows Subsystem for Linux, which supplies the kernel. Now try uname -o. The o stands for operating system. And there is the name from lesson 1.1: GNU/Linux. That is how Linux systems label themselves.",
+   "tail": 0.3
+  },
+  {
+   "id": "s14",
+   "chapter": "Hands-on: the result",
+   "text": "The GNU side is on this machine too. I'll ask the shell for its version, with bash --version. The first line says GNU bash, the shell from the GNU project, the program reading every command I type. One honest note. Ubuntu 26.04 already ships some basic tools, like ls, cat and uname, as modern rewrites of the GNU originals. The name GNU/Linux still describes the whole system. And bash is still the GNU original.",
+   "tail": 0.3
+  },
+  {
+   "id": "s15",
+   "chapter": "Hands-on: the result",
+   "text": "Now let's look inside the boot directory, with ls /boot. On a typical Ubuntu installation, this folder holds the kernel itself, in a file called vmlinuz. That file is the descendant of the kernel Linus began in 1991. But look at my screen: the folder is empty. That's because this lab is a container. A container is a small, isolated environment that shares the kernel of the machine underneath. On a normal installation, you would see vmlinuz right here.",
+   "tail": 0.3
+  },
+  {
+   "id": "s16",
+   "chapter": "Hands-on: the result",
+   "text": "Last, the manual. The command man man explains the manual system itself, and I'll pipe it into head to keep just the first twenty lines. Look at the name line: an interface to the system reference manuals. The manual pages descend from the original Unix documentation. Try it yourself without head: the manual opens in a viewer, and you press q to leave.",
+   "tail": 0.8
+  },
+  {
+   "id": "s17",
+   "chapter": "Your turn",
+   "text": "Now it's your turn. Pause the video, and run these commands on your own system. Your distribution and kernel version may differ from mine, and that's perfectly fine. If ls /boot is empty for you too, you may be on WSL, or inside a container, like me. If you don't have Linux yet, just watch for now. You'll have your own lab by lesson 1.5.",
+   "tail": 1.6
+  },
+  {
+   "id": "s18",
+   "chapter": "Recap",
+   "text": "Let's recap. Unix, from 1969, gave us the design: a tree of files, small tools, and the pipe. The GNU project, from 1983, gave us the free tools. And Linus Torvalds, in 1991, gave us the kernel. Put together, they became the Linux we use today. That is why some people say GNU/Linux. Most of us simply say Linux.",
+   "tail": 1
+  },
+  {
+   "id": "s19",
+   "chapter": "Recap",
+   "text": "In the next lesson, we'll look at distributions, the different flavours of Linux, and see how they differ. I'll see you there.",
+   "tail": 2.5
+  }
+ ]
+}

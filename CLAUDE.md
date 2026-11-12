@@ -2,7 +2,9 @@
 
 This repo turns a lesson plan into a **sellable course video**: real Ubuntu footage recorded by scripts, narration
 (AI placeholder or the instructor's own voice), restrained motion design, captions and a thumbnail. **Lesson 1.1
-(`lessons/1.1/`, 8:49) is the reference**: every new lesson must look and feel like it.
+(`lessons/1.1/`, 8:49) is the reference**: every new lesson must look and feel like it. Lesson 1.2 (`lessons/1.2/`,
+10:11, made end to end by Sonnet with `/lesson`) is a second worked example: a history lesson built mostly from bespoke
+diagrams (`studio/src/lessons/1.2/Story.tsx`) plus one continuous terminal clip.
 
 The person typing is the **instructor**: a Linux teacher who is new to Claude Code. Their prompts are short. You are the
 **producer**: you turn "make 1.2" into a finished lesson, asking only what you truly need (see `/lesson`). Keep
@@ -77,6 +79,14 @@ python tools/frame_at.py s12 "phrase"                       global frame where a
 - The kernel is the Docker host's (`...microsoft-standard-WSL2` on Windows). PID 1 is `s6-svscan`, not `systemd`.
   Boot/systemd/WSL-install topics (lessons 1.5, 1.6 parts, module 5) need a real VM or host-screen capture: **not built
   yet — stop and tell the instructor instead of faking it.**
+- `/boot` is **empty**: a container borrows the host's kernel (the same is true on WSL), so there is no `vmlinuz`.
+  Lessons that tour `/` or `/boot` (1.6!) must say so honestly. Lesson 1.2's pattern: "on a typical installation this
+  folder holds the kernel, a file called vmlinuz … but look at my screen: it's empty, because …", over the real listing.
+- Ubuntu 26.04 ships `ls`, `uname` and other basic commands from **uutils** (a Rust rewrite), not GNU: `ls --version`
+  prints `uutils coreutils`, and those commands have **no man pages** (`man ls` → "No manual entry"). `bash`, `cp`,
+  `gcc` are GNU. Never present this machine's `ls` as "a GNU tool" on screen. `man man`, `man bash` work
+  (`lab/setup.sh` restores the man pages the minimized Docker image strips).
+- `/proc/version` shows the kernel was built with GCC and GNU binutils — a truthful "GNU + Linux in one line" moment.
 - Docker-image folders (`/app`, `/config`, …) are hidden from Thunar via `/.hidden`; `ls /` in a terminal still shows them.
 - System Monitor's graphs are empty on open: wait ~45 s before filming Resources. Its tab clicks need mouse motion first.
 - Thunar draws a folder ~3 s after a double-click; GTK4 windows re-apply their size after mapping (`place` re-asserts).
