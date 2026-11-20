@@ -2,7 +2,8 @@
 
 This project makes the course videos. You write (or approve) the words; Claude records a real Ubuntu desktop,
 adds the narration and the graphics, reviews the result and gives you the finished MP4 with subtitles.
-**Lessons 1.1 (8:49) and 1.2 (10:11) were made with it**: see the Releases page of this repository for the videos.
+**Lessons 1.1 (8:49) and 1.2 (10:11) were made with it** (the finished videos are part of the paid course and are shared
+with the instructor privately, not published here).
 
 You don't need to know how any of the code works. You talk to Claude in VS Code with four commands:
 
@@ -16,12 +17,32 @@ You don't need to know how any of the code works. You talk to Claude in VS Code 
 ## Where things stand
 | Lesson | Status |
 |---|---|
-| 1.1 What is an operating system? | done (AI voice) — video in Releases `v1.1` |
-| 1.2 How Linux came into existence | done (AI voice) — video in Releases `v1.2` |
+| 1.1 What is an operating system? | done (AI voice) |
+| 1.2 How Linux came into existence | done (AI voice) |
 | 1.3 Linux distributions | **next: `/lesson 1.3`** |
 | 1.4 Open source and licensing | to do |
 | 1.5 Setting up your Linux lab | to do — parts need a real VM/WSL screen, which the Docker lab can't show (Claude will explain) |
 | 1.6 The Linux file system hierarchy | to do |
+
+## Quick start: one prompt does the setup
+1. Install **VS Code** (https://code.visualstudio.com), **Git** (https://git-scm.com; keep "Git Bash" selected) and the
+   **Claude Code** extension in VS Code (https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code). Sign in
+   with your Claude account.
+2. Make an empty folder `C:\Courses`, open it in VS Code (**File → Open Folder**), open the Claude Code panel and paste:
+
+```
+Please set up my Linux course video studio on this computer.
+1. Clone https://github.com/nagapuripradeep02-web/linux-course-studio into C:\Courses\linux-course-studio (never inside OneDrive).
+2. Read README.md and CLAUDE.md in that folder, then follow every step of .claude/skills/setup/SKILL.md, running commands from that folder.
+3. If something must be installed by hand (Node.js, Python, ffmpeg, Docker Desktop), give me the exact download link, wait while I install it, then check again and continue.
+4. At the end, tell me in plain, short words what is ready and exactly what I do next to make Lesson 1.3.
+I am a Linux teacher, not a programmer: keep explanations simple.
+```
+
+3. When it's done, open `C:\Courses\linux-course-studio` in VS Code (**File → Open Folder**), start a new Claude chat there
+   and type **`/lesson 1.3`**. (The `/lesson`, `/voice`, `/review` commands only appear when this folder is the one open.)
+
+The sections below explain the same steps by hand.
 
 ## 1. Install these first (about 30 minutes)
 1. **Git** — https://git-scm.com (Windows: keep "Git Bash" selected during install)
@@ -81,7 +102,7 @@ then type **`/voice 1.2 C:\path\to\that\folder`**. Everything re-syncs to your w
 | Render crashed or the PC froze | tell Claude: *"render with concurrency 2"* |
 | A word is mispronounced | tell Claude the word; it adds a pronunciation rule and regenerates that section |
 | Claude seems lost, stopped, or hit a usage limit | new chat (`/clear`), then `/lesson <number>` again — it detects where it stopped and continues |
-| Want to open a finished lesson (1.1, 1.2) in the editor | download `lesson-<number>-media.zip` from Releases, unzip into the project folder, then ask Claude to open the studio |
+| Want to open a finished lesson (1.1, 1.2) in the editor | get that lesson's `lesson-<number>-media.zip` (shared privately), unzip it into the project folder, then ask Claude to open the studio |
 
 ## What's inside (for the curious)
 Real Ubuntu desktop in Docker, driven by scripts and recorded with ffmpeg · Kokoro AI voice (or yours) with word-level

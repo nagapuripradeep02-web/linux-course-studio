@@ -69,3 +69,6 @@ re-recording, so `python tools/studio.py open` shows the finished lesson.
 ## 6. Report
 Tell the instructor, in plain words: what is installed and working, what you installed, anything they must still do,
 and that the next step is `/lesson <id>` for the first lesson in `course/module-1.md` without a `lessons/<id>/` folder (in a fresh session). Keep it under 12 lines.
+If this session was not started with the project folder open (e.g. you cloned it from a prompt), end with: "Now open
+`<project folder>` in VS Code (File → Open Folder), start a new Claude chat there, and type `/lesson <id>`" — the
+project's slash commands only load when the project folder is the open workspace.
